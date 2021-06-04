@@ -4,11 +4,12 @@ import com.core.annotation.Component;
 import com.core.annotation.Controller;
 import com.core.annotation.Repository;
 import com.core.annotation.Service;
+import com.aop.annotation.Aspect;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import com.core.utils.*;
+import com.utils.*;
 import java.lang.annotation.Annotation;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
  * @AUTHOR zzf
  * @DATA 2021/5/30 23:08
  */
-//@Slf4j
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BeanContainer {
 
@@ -39,19 +40,6 @@ public class BeanContainer {
     public static BeanContainer getInstance() {
         return beanContainer;
     }
-
-//    public static BeanContainer getInstance() {
-//        return ContainerHolder.HOLDER.instance;
-//    }
-//
-//    private enum ContainerHolder {
-//        HOLDER;
-//        private BeanContainer instance;
-//
-//        ContainerHolder() {
-//            instance = new BeanContainer();
-//        }
-//    }
 
 
     /**
@@ -126,13 +114,12 @@ public class BeanContainer {
      * 需要被加载的类的列表
      */
     private static final List<Class<? extends Annotation>> BEAN_ANNOTATION
-            = Arrays.asList(Component.class, Controller.class, Service.class, Repository.class);
+            = Arrays.asList(Component.class, Controller.class, Service.class, Repository.class, Aspect.class);
 
 
     public void loadBeanContainer(String basePackage){
         if(isLoadBean){
-            System.out.println("Bean已被加载");
-//            log.warn("bean已经加载");
+            log.warn("bean已经加载");
             return;
         }
 
@@ -150,7 +137,7 @@ public class BeanContainer {
             addBean(clz,ClassUtil.newInstance(clz));
 //            System.out.println(beanMap.get(clz).toString());
         });
+        System.out.println(beanMap.size());
         isLoadBean=true;
     }
-
 }
