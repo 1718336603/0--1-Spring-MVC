@@ -1,8 +1,8 @@
-package com.ioc;
+package com.aoptest;
 
 import com.core.BeanContainer;
 import com.aop.Aop;
-import com.test.DoodleController;
+import com.ioc.Ioc;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ public class IocTest {
     @Test
     public void doIocTest(){
         BeanContainer beanContainer=BeanContainer.getInstance();
-        beanContainer.loadBeanContainer("com.test");
+        beanContainer.loadBeanContainer("com.aoptest");
         new Aop().doAop();
         new Ioc().doIoc();
         DoodleController doodleController= (DoodleController) beanContainer.getBean(DoodleController.class);

@@ -1,4 +1,4 @@
-package com.test;
+package com.aoptest;
 
 import com.core.annotation.Controller;
 import com.ioc.annotation.Autowired;
